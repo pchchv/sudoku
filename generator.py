@@ -1,3 +1,4 @@
+import math
 import random
 
 
@@ -77,4 +78,9 @@ def cellsDeleter(firstBoard,number):
 
 def sudokuGenerator(firstBoard, level):
     randomBoardGenerator(firstBoard)
-    cellsDeleter(firstBoard,30)
+    if level == 1: # TODO: Level selection must be implemented
+        cellsDeleter(firstBoard,30)
+    if level == 2:
+        cellsDeleter(firstBoard,40)
+    if level == 3:
+        cellsDeleter(firstBoard,50)
