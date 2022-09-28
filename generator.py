@@ -13,6 +13,18 @@ firstBoard = [
         [0, 0, 0, 0, 0, 0, 0, 0, 0]
     ]
 
+def boardPronter(board):
+    for i in range(len(board)):
+        if i % 3 == 0 and i != 0:
+            print("- - - - - - - - - - - -")
+        for j in range(len(board[0])):
+            if j % 3 == 0 and j != 0:
+                print(" | ", end="")
+            if j == 8:  # end of the row
+                print(board[i][j])
+            else:
+                print(str(board[i][j]) + " ", end="")
+
 def randomBoardGenerator(board):
     # Getting to the end of the board - the function findEmpty return NONE
     find = findEmpty(board)
