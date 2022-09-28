@@ -55,5 +55,14 @@ def validator(board, number, coordinates):
                 return False
     return True
 
+def cellsDeleter(firstBoard,number):
+    while number:
+        row = random.randint(0, 8)
+        col = random.randint(0, 8)
+        if firstBoard[row][col] != 0:
+            firstBoard[row][col] = 0
+            number = number - 1
+
 def sudokuGenerator(firstBoard, level):
     randomBoardGenerator(firstBoard)
+    cellsDeleter(firstBoard,30)
