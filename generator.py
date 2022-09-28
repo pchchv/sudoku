@@ -1,3 +1,6 @@
+import random
+
+
 firstBoard = [
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -9,6 +12,22 @@ firstBoard = [
         [0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0]
     ]
+
+def randomBoardGenerator(board):
+    # Getting to the end of the board - the function findEmpty return NONE
+    find = findEmpty(board)
+    if find is None:  # if find != False
+        return True
+    else:
+        row, col = find
+    for number in range(1, 10):
+        randomNumber = random.randint(1, 9) # TODO: The algorithm needs to be optimized
+        if validator(board, randomNumber, (row, col)):
+            board[row][col] = randomNumber
+            if randomBoardGenerator(board):
+                return True
+            board[row][col] = 0
+    return False
 
 def findEmpty(board):
     for y in range(len(board)):
