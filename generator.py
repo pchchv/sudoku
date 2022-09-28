@@ -54,3 +54,6 @@ def validator(board, number, coordinates):
             if number == board[y][x] and (y, x) != coordinates:
                 return False
     return True
+
+def sudokuGenerator(firstBoard, level):
+    randomBoardGenerator(firstBoard)
