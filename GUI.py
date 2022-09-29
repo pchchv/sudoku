@@ -42,6 +42,17 @@ def initBoardDrawer():
             borderDrawer()
 
 
+def addNumToBoard(number, row, column, color):
+    addNewRect(row, column, WHITE, 5)
+    addNewRect(row, column, color, None)
+    font = pygame.font.Font('freesansbold.ttf', 32)
+    text = font.render(str(number), True, BLACK, )
+    textRect = text.get_rect()  # get_rect() -> Returns a new rectangle covering the entire surface
+    textRect.center = ((MARGIN + WIDTH) * column + MARGIN + WIDTH / 2, (MARGIN + HEIGHT) * row + MARGIN + WIDTH / 2)
+    screen.blit(text, textRect)
+    borderDrawer()
+
+
 def addNewRect(row, col, color, width):
     rectSize = pygame.Rect((MARGIN + WIDTH) * col + MARGIN, (MARGIN + HEIGHT) * row + MARGIN, WIDTH, HEIGHT)
     if width is not None:
