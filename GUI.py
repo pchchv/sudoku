@@ -132,6 +132,16 @@ if __name__ == "__main__":
                 if Board[row][column] == 0:
                     addNewRect(row, column, YELLOW, 5)
                     readyForInput = True
+        if readyForInput and key is not None:
+            if int(key) == sol[row][column]:
+                Board[row][column] = key
+                flickering(0.1, GREEN)  # Flickering at a 0.2 seconds with the color green
+                addNumToBoard(key, row, column, L_GREEN)
+            else:
+                flickering(0.1, RED)  # Flickering at a 0.2 seconds with the color red
+                addNumToBoard(key, row, column, L_RED)
+            borderDrawer()
+            readyForInput = False
         key = None
         pygame.display.flip()
         pygame.display.update()
