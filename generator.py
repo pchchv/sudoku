@@ -83,7 +83,7 @@ def cellsDeleter(firstBoard,number):
 
 def sudokuGenerator(firstBoard, level):
     randomBoardGenerator(firstBoard)
-    if level == 1: # TODO: Level selection must be implemented
+    if level == 1:
         cellsDeleter(firstBoard,30)
     if level == 2:
         cellsDeleter(firstBoard,40)
