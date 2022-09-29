@@ -13,7 +13,8 @@ firstBoard = [
         [0, 0, 0, 0, 0, 0, 0, 0, 0]
     ]
 
-def boardPronter(board):
+
+def boardPrinter(board):
     for i in range(len(board)):
         if i % 3 == 0 and i != 0:
             print("- - - - - - - - - - - -")
@@ -24,6 +25,7 @@ def boardPronter(board):
                 print(board[i][j])
             else:
                 print(str(board[i][j]) + " ", end="")
+
 
 def randomBoardGenerator(board):
     # Getting to the end of the board - the function findEmpty return NONE
@@ -41,6 +43,7 @@ def randomBoardGenerator(board):
             board[row][col] = 0
     return False
 
+
 def findEmpty(board):
     for y in range(len(board)):
         for x in range(len(board[0])):
@@ -48,6 +51,7 @@ def findEmpty(board):
                 return y, x  # y = row , x = column
     # if we got here it mean that we finish the sudoku, so return none
     return None
+
 
 def validator(board, number, coordinates):
     # checking row
@@ -67,6 +71,7 @@ def validator(board, number, coordinates):
                 return False
     return True
 
+
 def cellsDeleter(firstBoard,number):
     while number:
         row = random.randint(0, 8)
@@ -74,6 +79,7 @@ def cellsDeleter(firstBoard,number):
         if firstBoard[row][col] != 0:
             firstBoard[row][col] = 0
             number = number - 1
+
 
 def sudokuGenerator(firstBoard, level):
     randomBoardGenerator(firstBoard)
