@@ -14,7 +14,7 @@ import random
 #     ]
 
 
-def boardPrinter(board):
+def board_printer(board):
     for i in range(len(board)):
         if i % 3 == 0 and i != 0:
             print("- - - - - - - - - - - -")
@@ -27,24 +27,24 @@ def boardPrinter(board):
                 print(str(board[i][j]) + " ", end="")
 
 
-def randomBoardGenerator(board):
+def random_board_generator(board):
     # Getting to the end of the board - the function findEmpty return NONE
-    find = findEmpty(board)
+    find = find_empty(board)
     if find is None:  # if find != False
         return True
     else:
         row, col = find
     for number in range(1, 10):
-        randomNumber = random.randint(1, 9) # TODO: The algorithm needs to be optimized
-        if validator(board, randomNumber, (row, col)):
-            board[row][col] = randomNumber
-            if randomBoardGenerator(board):
+        random_number = random.randint(1, 9) # TODO: The algorithm needs to be optimized
+        if validator(board, random_number, (row, col)):
+            board[row][col] = random_number
+            if random_board_generator(board):
                 return True
             board[row][col] = 0
     return False
 
 
-def findEmpty(board):
+def find_empty(board):
     for y in range(len(board)):
         for x in range(len(board[0])):
             if board[y][x] == 0:
@@ -72,20 +72,20 @@ def validator(board, number, coordinates):
     return True
 
 
-def cellsDeleter(firstBoard,number):
+def cells_deleter(board,number):
     while number:
         row = random.randint(0, 8)
         col = random.randint(0, 8)
-        if firstBoard[row][col] != 0:
-            firstBoard[row][col] = 0
+        if board[row][col] != 0:
+            board[row][col] = 0
             number = number - 1
 
 
-def sudokuGenerator(firstBoard, level):
-    randomBoardGenerator(firstBoard)
+def sudoku_generator(board, level):
+    random_board_generator(board)
     if level == 1:
-        cellsDeleter(firstBoard,30)
+        cells_deleter(board,30)
     if level == 2:
-        cellsDeleter(firstBoard,40)
+        cells_deleter(board,40)
     if level == 3:
-        cellsDeleter(firstBoard,50)
+        cells_deleter(board,50)

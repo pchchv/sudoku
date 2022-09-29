@@ -4,11 +4,10 @@ import pygame
 import time
 
 
-screen = pygame.display.set_mode(size)
 numbers_1to9 = [pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5, pygame.K_6, pygame.K_7, pygame.K_8, pygame.K_9]
 
 
-def borderDrawer():
+def border_drawer():
     dif = 500 // 9
     for i in range(10):
         thick = 5
@@ -21,73 +20,73 @@ def borderDrawer():
             pygame.draw.line(screen, BLACK, (i * dif, 0), (i * dif, 500), thick)
 
 
-def initBoardDrawer():
-    for row in range(len(Board)):
-        for column in range(len(Board[row])):
+def init_board_drawer():
+    for ROW in range(len(Board)):
+        for COLUMN in range(len(Board[ROW])):
             color = L_GRAY
-            if Board[row][column] == 0:  # if we want to change to background of the empty cells
+            if Board[row][COLUMN] == 0:  # if we want to change to background of the empty cells
                 color = WHITE
             pygame.draw.rect(screen, color,
-                             [(MARGIN + WIDTH) * column + MARGIN, (MARGIN + HEIGHT) * row + MARGIN, WIDTH, HEIGHT])
+                             [(MARGIN + WIDTH) * COLUMN + MARGIN, (MARGIN + HEIGHT) * row + MARGIN, WIDTH, HEIGHT])
             # Show nothing if the number is 0
             font = pygame.font.Font('freesansbold.ttf', 32)
-            if Board[row][column] == 0:
+            if Board[row][COLUMN] == 0:
                 text = font.render(" ", True, BLACK, )  # render(text, anti-alias[True], color, background=None)
             else:
-                text = font.render(str(Board[row][column]), True, BLACK, )
+                text = font.render(str(Board[row][COLUMN]), True, BLACK, )
 
-            textRect = text.get_rect()  # get_rect() -> Returns a new rectangle covering the entire surface
-            textRect.center = (
-                (MARGIN + WIDTH) * column + MARGIN + WIDTH / 2, (MARGIN + HEIGHT) * row + MARGIN + WIDTH / 2)
-            screen.blit(text, textRect)
-            borderDrawer()
+            text_rect = text.get_rect()  # get_rect() -> Returns a new rectangle covering the entire surface
+            text_rect.center = (
+                (MARGIN + WIDTH) * COLUMN + MARGIN + WIDTH / 2, (MARGIN + HEIGHT) * row + MARGIN + WIDTH / 2)
+            screen.blit(text, text_rect)
+            border_drawer()
 
 
-def cheatingAllTheWay():
-    for row in range(len(Board)):
-        for column in range(len(Board[row])):
-            Board[row][column] = solvedBoard[row][column]
-            addNumToBoard(Board[row][column], row, column, L_GREEN)
+def cheating_all_the_way(solved_board):
+    for ROW in range(len(Board)):
+        for COLUMN in range(len(Board[ROW])):
+            Board[ROW][COLUMN] = solved_board[ROW][COLUMN]
+            add_num_to_board(Board[ROW][COLUMN], ROW, COLUMN, L_GREEN)
             time.sleep(0.05)
             pygame.display.flip()
     finish()
 
 
-def addNumToBoard(number, row, column, color):
-    addNewRect(row, column, WHITE, 5)
-    addNewRect(row, column, color, None)
+def add_num_to_board(number, ROW, COLUMN, color):
+    add_new_rect(ROW, COLUMN, WHITE, 5)
+    add_new_rect(ROW, COLUMN, color, None)
     font = pygame.font.Font('freesansbold.ttf', 32)
     text = font.render(str(number), True, BLACK, )
-    textRect = text.get_rect()  # get_rect() -> Returns a new rectangle covering the entire surface
-    textRect.center = ((MARGIN + WIDTH) * column + MARGIN + WIDTH / 2, (MARGIN + HEIGHT) * row + MARGIN + WIDTH / 2)
-    screen.blit(text, textRect)
-    borderDrawer()
+    text_rect = text.get_rect()  # get_rect() -> Returns a new rectangle covering the entire surface
+    text_rect.center = ((MARGIN + WIDTH) * COLUMN + MARGIN + WIDTH / 2, (MARGIN + HEIGHT) * ROW + MARGIN + WIDTH / 2)
+    screen.blit(text, text_rect)
+    border_drawer()
 
 
-def addNewRect(row, col, color, width):
-    rectSize = pygame.Rect((MARGIN + WIDTH) * col + MARGIN, (MARGIN + HEIGHT) * row + MARGIN, WIDTH, HEIGHT)
+def add_new_rect(row, col, color, width):
+    rect_size = pygame.Rect((MARGIN + WIDTH) * col + MARGIN, (MARGIN + HEIGHT) * row + MARGIN, WIDTH, HEIGHT)
     if width is not None:
-        pygame.draw.rect(screen, color, rectSize, width)  # Coloring only the border
+        pygame.draw.rect(screen, color, rect_size, width)  # Coloring only the border
     else:
-        pygame.draw.rect(screen, color, rectSize)  # Coloring the whole rectangle
+        pygame.draw.rect(screen, color, rect_size)  # Coloring the whole rectangle
 
 
-def flickering(timeFlickering, color):  # Flickering with color on-off
-    addNewRect(row, column, color, 5)
+def flickering(time_flickering, color):  # Flickering with color on-off
+    add_new_rect(row, column, color, 5)
     pygame.display.flip()
-    time.sleep(timeFlickering)
-    addNewRect(row, column, WHITE, 5)
+    time.sleep(time_flickering)
+    add_new_rect(row, column, WHITE, 5)
     pygame.display.flip()
-    time.sleep(timeFlickering)
-    addNewRect(row, column, color, 5)
+    time.sleep(time_flickering)
+    add_new_rect(row, column, color, 5)
     pygame.display.flip()
-    time.sleep(timeFlickering)
-    addNewRect(row, column, WHITE, 5)
+    time.sleep(time_flickering)
+    add_new_rect(row, column, WHITE, 5)
     pygame.display.flip()
 
 
-def finish():
-    if solvedBoard == Board:
+def finish(solved_board):
+    if solved_board == Board:
         print("good")
     else:
         print("not good")
@@ -96,18 +95,18 @@ def finish():
 if __name__ == "__main__":
     flag1 = True
     while flag1:
-        level = levelSelector()
+        level = level_selector()
         if level == 1 or level == 2 or level == 3:
             print(level)
             flag1 = False
     pygame.display.set_caption("Sudoku King1")
     screen = pygame.display.set_mode(size)
-    sol = mainSolver(level)  # Аirst at all the script solve the sudoku by itself
+    sol = main_solver(level)  # First at all the script solve the sudoku by itself
     print("solveBoard")
-    boardPrinter(sol)
+    board_printer(sol)
     pygame.init()
     screen.fill(BLACK)
-    initBoardDrawer()
+    init_board_drawer()
     readyForInput = False
     key = None
     while not done:
@@ -120,27 +119,27 @@ if __name__ == "__main__":
                 if event.key == pygame.K_RETURN:
                     finish()
                 if event.key == pygame.K_c:
-                    cheatingAllTheWay()
+                    cheating_all_the_way()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if readyForInput is True:
-                    addNewRect(row, column, WHITE, None)
-                    borderDrawer()
+                    add_new_rect(row, column, WHITE, None)
+                    border_drawer()
                     readyForInput = False
                 pos = pygame.mouse.get_pos()
                 column = pos[0] // (WIDTH + MARGIN)
                 row = pos[1] // (WIDTH + MARGIN)
                 if Board[row][column] == 0:
-                    addNewRect(row, column, YELLOW, 5)
+                    add_new_rect(row, column, YELLOW, 5)
                     readyForInput = True
         if readyForInput and key is not None:
             if int(key) == sol[row][column]:
                 Board[row][column] = key
                 flickering(0.1, GREEN)  # Flickering at a 0.2 seconds with the color green
-                addNumToBoard(key, row, column, L_GREEN)
+                add_num_to_board(key, row, column, L_GREEN)
             else:
                 flickering(0.1, RED)  # Flickering at a 0.2 seconds with the color red
-                addNumToBoard(key, row, column, L_RED)
-            borderDrawer()
+                add_num_to_board(key, row, column, L_RED)
+            border_drawer()
             readyForInput = False
         key = None
         pygame.display.flip()

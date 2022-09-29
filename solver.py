@@ -14,12 +14,12 @@ Board = [
         [0, 0, 0, 0, 0, 0, 0, 0, 0]
     ]
 
-solbedBoard = copy.deepcopy(Board)
+solbed_board = copy.deepcopy(Board)
 
 
-def sudokuSolver(board):
+def sudoku_solver(board):
     # Get to the end of the board. The findEmpty function returns NONE
-    find = findEmpty(board)
+    find = find_empty(board)
     if find is None:
         return True
     else:
@@ -27,14 +27,14 @@ def sudokuSolver(board):
     for number in range(1, 10):
         if validator(board, number, (row, col)):
             board[row][col] = number
-            if sudokuSolver(board):
+            if sudoku_solver(board):
                 return True
             board[row][col] = 0
     return False
 
 
-def mainSolver(level):
-    sudokuGenerator(Board, level)
-    solvedBoard = copy.deepcopy(Board)
-    sudokuSolver(solvedBoard)
-    return solvedBoard
+def main_solver(level):
+    sudoku_generator(Board, level)
+    solved_board = copy.deepcopy(Board)
+    sudoku_solver(solved_board)
+    return solved_board
