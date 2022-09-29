@@ -3,7 +3,15 @@ import pygame
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-GRAY = (80, 80, 80)
+GREEN = (0, 255, 0)
+L_GREEN = (150, 255, 150)
+RED = (255, 0, 0)
+L_RED = (255, 204, 203)
+GRAY = (60, 60, 60)
+L_GRAY = (220, 220, 220)
+YELLOW = (255, 255, 0)
+WIDTH = HEIGHT = 50
+MARGIN = 5
 pygame.init()
 X = 300
 Y = 200
