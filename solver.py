@@ -31,3 +31,10 @@ def sudokuSolver(board):
                 return True
             board[row][col] = 0
     return False
+
+
+def mainSolver(level):
+    sudokuGenerator(Board, level)
+    solvedBoard = copy.deepcopy(Board)
+    sudokuSolver(solvedBoard)
+    return solvedBoard
