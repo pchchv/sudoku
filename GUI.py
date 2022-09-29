@@ -72,6 +72,20 @@ def addNewRect(row, col, color, width):
         pygame.draw.rect(screen, color, rectSize)  # Coloring the whole rectangle
 
 
+def flickering(timeFlickering, color):  # Flickering with color on-off
+    addNewRect(row, column, color, 5)
+    pygame.display.flip()
+    time.sleep(timeFlickering)
+    addNewRect(row, column, WHITE, 5)
+    pygame.display.flip()
+    time.sleep(timeFlickering)
+    addNewRect(row, column, color, 5)
+    pygame.display.flip()
+    time.sleep(timeFlickering)
+    addNewRect(row, column, WHITE, 5)
+    pygame.display.flip()
+
+
 def finish():
     if solvedBoard == Board:
         print("good")
