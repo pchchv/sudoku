@@ -1,6 +1,7 @@
 from solver import *
 from level import *
 import pygame
+import time
 
 
 screen = pygame.display.set_mode(size)
@@ -40,6 +41,16 @@ def initBoardDrawer():
                 (MARGIN + WIDTH) * column + MARGIN + WIDTH / 2, (MARGIN + HEIGHT) * row + MARGIN + WIDTH / 2)
             screen.blit(text, textRect)
             borderDrawer()
+
+
+def cheatingAllTheWay():
+    for row in range(len(Board)):
+        for column in range(len(Board[row])):
+            Board[row][column] = solvedBoard[row][column]
+            addNumToBoard(Board[row][column], row, column, L_GREEN)
+            time.sleep(0.05)
+            pygame.display.flip()
+    finish()
 
 
 def addNumToBoard(number, row, column, color):
