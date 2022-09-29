@@ -77,3 +77,51 @@ def finish():
         print("good")
     else:
         print("not good")
+
+
+if __name__ == "__main__":
+    flag1 = True
+    while flag1:
+        level = levelSelector()
+        if level == 1 or level == 2 or level == 3:
+            print(level)
+            flag1 = False
+    pygame.display.set_caption("Sudoku King1")
+    screen = pygame.display.set_mode(size)
+    sol = mainSolver(level)  # Аirst at all the script solve the sudoku by itself
+    print("solveBoard")
+    boardPrinter(sol)
+    pygame.init()
+    screen.fill(BLACK)
+    initBoardDrawer()
+    readyForInput = False
+    key = None
+    while not done:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                done = True
+            if event.type == pygame.KEYDOWN:
+                if event.key in numbers_1to9:
+                    key = chr(event.key)
+                if event.key == pygame.K_RETURN:
+                    finish()
+                if event.key == pygame.K_c:
+                    cheatingAllTheWay()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if readyForInput is True:
+                    addNewRect(row, column, WHITE, None)
+                    borderDrawer()
+                    readyForInput = False
+                pos = pygame.mouse.get_pos()
+                column = pos[0] // (WIDTH + MARGIN)
+                row = pos[1] // (WIDTH + MARGIN)
+                if Board[row][column] == 0:
+                    addNewRect(row, column, YELLOW, 5)
+                    readyForInput = True
+        key = None
+        pygame.display.flip()
+        pygame.display.update()
+
+
+# Close the window and quit
+pygame.quit()
