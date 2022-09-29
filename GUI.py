@@ -1,6 +1,6 @@
-import pygame
 from solver import *
 from level import *
+import pygame
 
 
 screen = pygame.display.set_mode(size)
@@ -40,6 +40,14 @@ def initBoardDrawer():
                 (MARGIN + WIDTH) * column + MARGIN + WIDTH / 2, (MARGIN + HEIGHT) * row + MARGIN + WIDTH / 2)
             screen.blit(text, textRect)
             borderDrawer()
+
+
+def addNewRect(row, col, color, width):
+    rectSize = pygame.Rect((MARGIN + WIDTH) * col + MARGIN, (MARGIN + HEIGHT) * row + MARGIN, WIDTH, HEIGHT)
+    if width is not None:
+        pygame.draw.rect(screen, color, rectSize, width)  # Coloring only the border
+    else:
+        pygame.draw.rect(screen, color, rectSize)  # Coloring the whole rectangle
 
 
 def finish():
